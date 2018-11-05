@@ -9,7 +9,7 @@ class RegisterController < ApplicationController
         @user.last_name = params["last_name"]
         @user.first_name = params["first_name"]
         @user.email = params["email"]
-        @user.password_digest = params['password_digest']
+        @user.password = params['password']
       
       if @user.save
       	log_in @user
