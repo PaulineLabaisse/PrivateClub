@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
+
 
   # GET /users
   # GET /users.json
@@ -70,4 +72,11 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:last_name, :first_name, :email, :password_digest)
     end
+
+   def require_login
+     unless logged_in?
+       flash[:info] = "You must be logged in to access this section"
+       redirect_to '/login' # halts request cycle
+     end
+   end
 end
